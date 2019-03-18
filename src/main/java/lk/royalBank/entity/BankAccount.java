@@ -39,6 +39,9 @@ public class BankAccount {
     private List<Withdraw> withdraws;
     @OneToMany(mappedBy = "bankAccount",fetch = FetchType.LAZY)
     private List<SendMoney> sendMonies;
+
+
+
     public BankAccount(String accountNumber, double amount, String createdAt, String accountType) {
         this.setAccountNumber(accountNumber);
         this.setAmount(amount);

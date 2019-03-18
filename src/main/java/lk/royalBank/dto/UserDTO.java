@@ -1,14 +1,7 @@
-package lk.royalBank.entity;
+package lk.royalBank.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
-public class User {
-
-    @Id
-    private
-    String userName;
+public class UserDTO {
+    private String userName;
 
     private String password;
 
@@ -16,16 +9,15 @@ public class User {
 
     private String ID;
 
-    public User(String userName, String password, String role, String ID) {
-        this.setUserName(userName);
-        this.setPassword(password);
-        this.setRole(role);
-        this.setID(ID);
+    public UserDTO(String userName, String password, String role, String ID) {
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+        this.ID = ID;
     }
 
-    public User() {
+    public UserDTO() {
     }
-
 
     public String getUserName() {
         return userName;
