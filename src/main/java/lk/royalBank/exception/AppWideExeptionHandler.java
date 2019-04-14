@@ -1,5 +1,6 @@
 package lk.royalBank.exception;
 
+import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,5 +14,12 @@ public class AppWideExeptionHandler {
     private String handleExeption(RuntimeException ex){
         ex.printStackTrace();
         return ex.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    private String notFound(NotFoundException ex){
+        ex.printStackTrace();
+        return "Not Found";
     }
 }

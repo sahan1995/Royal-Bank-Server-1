@@ -1,6 +1,7 @@
 package lk.royalBank.service.impl;
 
 import lk.royalBank.dto.ClientDTO;
+import lk.royalBank.entity.Branch;
 import lk.royalBank.entity.Client;
 import lk.royalBank.repository.ClientRepository;
 import lk.royalBank.service.BankAccountService;
@@ -23,7 +24,10 @@ public class ClientServiceImpl implements ClientService {
             throw new RuntimeException("ID's are Not Same");
         }
         Client client = new Client();
+        Branch branch = new Branch();
         BeanUtils.copyProperties(clientDTO,client);
+        BeanUtils.copyProperties(clientDTO.getBranchDTO(),branch);
+        client.setBranch(branch);
         clientRepository.save(client);
     }
 }

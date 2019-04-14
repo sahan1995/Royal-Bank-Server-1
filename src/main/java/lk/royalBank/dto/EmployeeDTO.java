@@ -18,6 +18,9 @@ public class EmployeeDTO {
     private String role;
     private boolean isBlocked;
 
+    private String userName;
+
+    private String password;
 
     private BranchDTO branchDTO;
 
@@ -25,7 +28,7 @@ public class EmployeeDTO {
 
     private List<ClientDTO> clientDTOS;
 
-    public EmployeeDTO(String empID, String fname, String mname, String lname, String dob, String nic, String country, String city, String address, Double salary, String gender, String tel, String role, boolean isBlocked) {
+    public EmployeeDTO(String empID, String fname, String mname, String lname, String dob, String nic, String country, String city, String address, Double salary, String gender, String tel, String role, boolean isBlocked, String userName, String password) {
         this.empID = empID;
         this.fname = fname;
         this.mname = mname;
@@ -40,12 +43,14 @@ public class EmployeeDTO {
         this.tel = tel;
         this.role = role;
         this.isBlocked = isBlocked;
+        this.userName = userName;
+        this.password = password;
     }
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String empID, String fname, String mname, String lname, String dob, String nic, String country, String city, String address, Double salary, String gender, String tel, String role, boolean isBlocked, BranchDTO branchDTO) {
+    public EmployeeDTO(String empID, String fname, String mname, String lname, String dob, String nic, String country, String city, String address, Double salary, String gender, String tel, String role, boolean isBlocked, String userName, String password, BranchDTO branchDTO) {
         this.empID = empID;
         this.fname = fname;
         this.mname = mname;
@@ -60,6 +65,8 @@ public class EmployeeDTO {
         this.tel = tel;
         this.role = role;
         this.isBlocked = isBlocked;
+        this.userName = userName;
+        this.password = password;
         this.branchDTO = branchDTO;
     }
 
@@ -197,6 +204,22 @@ public class EmployeeDTO {
 
     public void setClientDTOS(List<ClientDTO> clientDTOS) {
         this.clientDTOS = clientDTOS;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

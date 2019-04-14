@@ -1,6 +1,8 @@
 package lk.royalBank.entity;
 
 
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 
 @Entity

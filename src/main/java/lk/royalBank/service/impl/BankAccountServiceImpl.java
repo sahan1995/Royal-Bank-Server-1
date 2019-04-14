@@ -55,12 +55,13 @@ public class BankAccountServiceImpl implements BankAccountService {
     public double checkBalance(String accountNumber) {
         if(bankAccountRepository.findById(accountNumber).isPresent()){
             BankAccount bankAccount = bankAccountRepository.findById(accountNumber).get();
-            BankAccountDTO bankAccountDTO = new BankAccountDTO();
-            ClientDTO clientDTO = new ClientDTO();
-            BeanUtils.copyProperties(bankAccount,bankAccountDTO);
-            BeanUtils.copyProperties(bankAccount.getClient(),clientDTO);
-            bankAccountDTO.setClientDTO(clientDTO);
-            return bankAccountDTO.getAmount();
+            return bankAccount.getAmount();
+//            BankAccountDTO bankAccountDTO = new BankAccountDTO();
+//            ClientDTO clientDTO = new ClientDTO();
+//            BeanUtils.copyProperties(bankAccount,bankAccountDTO);
+//            BeanUtils.copyProperties(bankAccount.getClient(),clientDTO);
+//            bankAccountDTO.setClientDTO(clientDTO);
+//            return bankAccountDTO.getAmount();
         }else{
             throw new RuntimeException("Invalid Account Number ");
         }

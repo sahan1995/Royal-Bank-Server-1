@@ -23,4 +23,9 @@ public class BankAccountController {
     public double checkBalance(@RequestParam("accountNumber")String accountNumber){
         return bankAccountService.checkBalance(accountNumber);
     }
+
+    @GetMapping
+    public void test(){
+        throw new RuntimeException("Run Time");
+    }
 }
