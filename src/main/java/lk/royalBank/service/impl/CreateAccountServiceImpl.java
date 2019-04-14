@@ -23,10 +23,11 @@ public class CreateAccountServiceImpl implements CreateAccountService {
     UserService userService;
     @Override
     public void createAccount(CreateAccountDTO createAccountDTO) {
+
         clientService.addClient(createAccountDTO.getClientDTO().getClientID(),createAccountDTO.getClientDTO());
         bankAccountService.addBankAccount(createAccountDTO.getBankAccountDTO().getAccountNumber(),createAccountDTO.getBankAccountDTO());
         ClientDTO clientDTO = createAccountDTO.getClientDTO();
-        UserDTO userDTO = new UserDTO(clientDTO.getUserName(),clientDTO.getPassword(),"patient",clientDTO.getClientID());
+        UserDTO userDTO = new UserDTO(clientDTO.getUserName(),clientDTO.getPassword(),"client",clientDTO.getClientID());
         userService.addUser(clientDTO.getUserName(),userDTO);
 }
 }

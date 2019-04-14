@@ -22,11 +22,32 @@ public class EmployeeDTO {
 
     private String password;
 
+    private String brachid;
     private BranchDTO branchDTO;
 
     private List<BankAccountDTO> bankAccountDTOS;
 
     private List<ClientDTO> clientDTOS;
+
+    public EmployeeDTO(String empID, String fname, String mname, String lname, String dob, String nic, String country, String city, String address, Double salary, String gender, String tel, String role, boolean isBlocked, String userName, String password, String brachid) {
+        this.empID = empID;
+        this.fname = fname;
+        this.mname = mname;
+        this.lname = lname;
+        this.dob = dob;
+        this.nic = nic;
+        this.country = country;
+        this.city = city;
+        this.address = address;
+        this.salary = salary;
+        this.gender = gender;
+        this.tel = tel;
+        this.role = role;
+        this.isBlocked = isBlocked;
+        this.userName = userName;
+        this.password = password;
+        this.brachid = brachid;
+    }
 
     public EmployeeDTO(String empID, String fname, String mname, String lname, String dob, String nic, String country, String city, String address, Double salary, String gender, String tel, String role, boolean isBlocked, String userName, String password) {
         this.empID = empID;
@@ -68,6 +89,14 @@ public class EmployeeDTO {
         this.userName = userName;
         this.password = password;
         this.branchDTO = branchDTO;
+    }
+
+    public String getBrachid() {
+        return brachid;
+    }
+
+    public void setBrachid(String brachid) {
+        this.brachid = brachid;
     }
 
     public String getEmpID() {

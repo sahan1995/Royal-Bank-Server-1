@@ -7,9 +7,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 
-//@ComponentScan(basePackages = "lk.royalBank")
 @SpringBootApplication
-//@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
+
 public class Server1 {
 
     public static void main(String[] args) {
