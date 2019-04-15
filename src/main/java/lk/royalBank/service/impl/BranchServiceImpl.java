@@ -34,4 +34,16 @@ public class BranchServiceImpl implements BranchService {
 
         return branchDTOS;
     }
+
+    @Override
+    public BranchDTO findByID(String branchID) {
+        int branchIDI = Integer.parseInt(branchID);
+      if(  branchRepository.findById(branchIDI).isPresent()){
+          Branch branch = branchRepository.findById(branchIDI).get();
+          BranchDTO branchDTO = new BranchDTO();
+          BeanUtils.copyProperties(branch,branchDTO);
+          return branchDTO;
+      }
+      return null;
+    }
 }

@@ -12,7 +12,7 @@ public class BankAccount {
     private String createdAt;
     private String accountType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "clientID", referencedColumnName = "clientID")
     private
     Client client;

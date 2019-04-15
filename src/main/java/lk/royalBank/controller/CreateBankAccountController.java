@@ -1,5 +1,8 @@
 package lk.royalBank.controller;
 
+import lk.royalBank.dto.ATMcardDTO;
+import lk.royalBank.dto.BankAccountDTO;
+import lk.royalBank.dto.ClientDTO;
 import lk.royalBank.dto.CreateAccountDTO;
 import lk.royalBank.service.CreateAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,13 @@ public class CreateBankAccountController {
 
     @PostMapping
     public void createNewAccount(@RequestBody CreateAccountDTO createAccountDTO){
+
+
         createAccountService.createAccount(createAccountDTO);
+    }
+
+    @GetMapping
+    public ATMcardDTO test(){
+        return new ATMcardDTO();
     }
 }

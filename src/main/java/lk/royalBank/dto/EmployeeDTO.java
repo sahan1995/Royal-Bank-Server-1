@@ -268,6 +268,9 @@ public class EmployeeDTO {
                 ", tel='" + tel + '\'' +
                 ", role='" + role + '\'' +
                 ", isBlocked=" + isBlocked +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", brachid='" + brachid + '\'' +
                 ", branchDTO=" + branchDTO +
                 ", bankAccountDTOS=" + bankAccountDTOS +
                 ", clientDTOS=" + clientDTOS +

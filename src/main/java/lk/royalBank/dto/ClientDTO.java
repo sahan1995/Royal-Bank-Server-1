@@ -22,7 +22,8 @@ public class ClientDTO {
     private String userName;
 
     private String password;
-
+    private String branchid;
+    private String empid;
     private BranchDTO branchDTO;
 
     private EmployeeDTO employeeDTO;
@@ -30,7 +31,7 @@ public class ClientDTO {
     private List<BankAccountDTO> bankAccountDTOS;
 
 
-    public ClientDTO(String clientID, String fname, String mname, String lname, String gender, String dob, String nic, String country, String city, String address, String tel, String email, String occupation, boolean isBlocked, String userName, String password) {
+    public ClientDTO(String clientID, String fname, String mname, String lname, String gender, String dob, String nic, String country, String city, String address, String tel, String email, String occupation, boolean isBlocked, String userName, String password, String branchid, String empid) {
         this.clientID = clientID;
         this.fname = fname;
         this.mname = mname;
@@ -47,7 +48,10 @@ public class ClientDTO {
         this.isBlocked = isBlocked;
         this.userName = userName;
         this.password = password;
+        this.branchid = branchid;
+        this.empid = empid;
     }
+
 
     public ClientDTO(String clientID, String fname, String mname, String lname, String gender, String dob, String nic, String country, String city, String address, String tel, String email, String occupation, boolean isBlocked, String userName, String password, BranchDTO branchDTO) {
         this.clientID = clientID;
@@ -88,6 +92,14 @@ public class ClientDTO {
         this.fname = fname;
     }
 
+    public String getEmpid() {
+        return empid;
+    }
+
+    public void setEmpid(String empid) {
+        this.empid = empid;
+    }
+
     public String getMname() {
         return mname;
     }
@@ -122,6 +134,14 @@ public class ClientDTO {
 
     public String getNic() {
         return nic;
+    }
+
+    public String getBranchid() {
+        return branchid;
+    }
+
+    public void setBranchid(String branchid) {
+        this.branchid = branchid;
     }
 
     public void setNic(String nic) {
@@ -241,6 +261,9 @@ public class ClientDTO {
                 ", email='" + email + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", isBlocked=" + isBlocked +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", branchid='" + branchid + '\'' +
                 ", branchDTO=" + branchDTO +
                 ", employeeDTO=" + employeeDTO +
                 ", bankAccountDTOS=" + bankAccountDTOS +

@@ -9,6 +9,6 @@ public interface BranchService  {
 
     List<BranchDTO> getAll();
 
-
+    BranchDTO findByID(String branchID);
 
 }

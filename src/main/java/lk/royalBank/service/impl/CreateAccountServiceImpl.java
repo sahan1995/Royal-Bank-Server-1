@@ -6,10 +6,11 @@ import lk.royalBank.dto.UserDTO;
 import lk.royalBank.service.BankAccountService;
 import lk.royalBank.service.ClientService;
 import lk.royalBank.service.CreateAccountService;
-import lk.royalBank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Transactional
@@ -19,15 +20,25 @@ public class CreateAccountServiceImpl implements CreateAccountService {
     @Autowired
     BankAccountService bankAccountService;
 
-    @Autowired
-    UserService userService;
+
     @Override
     public void createAccount(CreateAccountDTO createAccountDTO) {
 
         clientService.addClient(createAccountDTO.getClientDTO().getClientID(),createAccountDTO.getClientDTO());
         bankAccountService.addBankAccount(createAccountDTO.getBankAccountDTO().getAccountNumber(),createAccountDTO.getBankAccountDTO());
         ClientDTO clientDTO = createAccountDTO.getClientDTO();
-        UserDTO userDTO = new UserDTO(clientDTO.getUserName(),clientDTO.getPassword(),"client",clientDTO.getClientID());
-        userService.addUser(clientDTO.getUserName(),userDTO);
+//        UserDTO userDTO = new UserDTO(clientDTO.getUserName(),clientDTO.getPassword(),"client",clientDTO.getClientID());
+
+        RestTemplate restTemplate = new RestTemplate();
+        try{
+            UserDTO userDTO = new UserDTO(clientDTO.getUserName(),clientDTO.getPassword(),"Client",clientDTO.getClientID());
+            ResponseEntity<Object> responseEntity = restTemplate.postForEntity("http://192.168.1.101:8082/api/v1/users/"+clientDTO.getUserName(), userDTO, null);
+        }catch (Exception e){
+            UserDTO userDTO = new UserDTO(clientDTO.getUserName(),clientDTO.getPassword(),"Client",clientDTO.getClientID());
+            ResponseEntity<Object> responseEntity = restTemplate.postForEntity("http://192.168.1.101:8083/api/v1/users/"+clientDTO.getUserName(), userDTO, null);
+
+
+        }
+
 }
 }

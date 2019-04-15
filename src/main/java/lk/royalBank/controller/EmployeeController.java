@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/v1/employee")
+@RequestMapping(value = "api/v1/employees")
 public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
     @PostMapping(value = "/{id}")
     public void addEmployee(@PathVariable("id") String empID, @RequestBody EmployeeDTO employeeDTO) {
-//        employeeService.addEmployee(empID, employeeDTO);
+        employeeService.addEmployee(empID, employeeDTO);
         System.out.println(employeeDTO);
         System.out.println(employeeDTO.getBrachid());
     }
 
-    @GetMapping
-    public EmployeeDTO findByID(String empID){
-        return new EmployeeDTO();
+    @GetMapping(value = "/{empID}")
+    public EmployeeDTO findbyID(@PathVariable("empID") String empID){
+        return employeeService.findBYID(empID);
     }
 }
