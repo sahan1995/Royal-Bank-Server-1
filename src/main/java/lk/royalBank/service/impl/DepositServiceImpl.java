@@ -24,18 +24,23 @@ public class DepositServiceImpl implements DepositService {
     @Override
     public void depositMoney(DepositDTO depositDTO) {
 
+//        Deposit deposit = new Deposit();
+//        BankAccount bankAccount = new BankAccount();
+//        BeanUtils.copyProperties(depositDTO,deposit);
+//        BeanUtils.copyProperties(depositDTO.getBankAccountDTO(),bankAccount);
+//        deposit.setBankAccount(bankAccount);
+//        depositRepository.save(deposit);
+
+
         Deposit deposit = new Deposit();
         BankAccount bankAccount = new BankAccount();
+
         BeanUtils.copyProperties(depositDTO,deposit);
         BeanUtils.copyProperties(depositDTO.getBankAccountDTO(),bankAccount);
         deposit.setBankAccount(bankAccount);
         depositRepository.save(deposit);
 
-        BankAccountDTO account = bankAccountService.getAccountByID(depositDTO.getBankAccountDTO().getAccountNumber());
-        double currentAmount = account.getAmount();
-        double depositAmount = depositDTO.getAmount();
-        double finalAmount = currentAmount + depositAmount;
-        account.setAmount(finalAmount);
+        bankAccountService.doTransAction("deposit",bankAccount.getAccountNumber(),depositDTO.getAmount());
 
     }
 }

@@ -24,8 +24,16 @@ public class BankAccountController {
         return bankAccountService.checkBalance(accountNumber);
     }
 
-    @GetMapping
-    public void test(){
-        throw new RuntimeException("Run Time");
+    @GetMapping(value = {"/{accNO}"})
+    public BankAccountDTO accountByID(@PathVariable("accNO") String accno){
+
+        System.out.println(accno);
+        return bankAccountService.getAccountByID(accno);
+    }
+
+
+    @PutMapping(path = "/doTransaction")
+    public void doTransaction(@RequestParam("type") String type,@RequestParam("accno") String accno, @RequestParam("amount") Double amount){
+        bankAccountService.doTransAction(type,accno,amount);
     }
 }

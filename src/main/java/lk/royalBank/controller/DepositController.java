@@ -12,8 +12,9 @@ public class DepositController {
 
     @Autowired
     DepositService depositService;
+
     @PostMapping
-    public void depostMoney(@RequestBody DepositDTO depositDTO){
+    public void depositMoney(@RequestBody DepositDTO depositDTO){
         depositService.depositMoney(depositDTO);
 
     }
