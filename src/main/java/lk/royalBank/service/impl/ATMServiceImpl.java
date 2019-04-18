@@ -2,8 +2,10 @@ package lk.royalBank.service.impl;
 
 import lk.royalBank.dto.ATMcardDTO;
 import lk.royalBank.dto.BankAccountDTO;
+import lk.royalBank.dto.ClientDTO;
 import lk.royalBank.entity.ATMcard;
 import lk.royalBank.entity.BankAccount;
+import lk.royalBank.entity.Client;
 import lk.royalBank.repository.ATMRepository;
 import lk.royalBank.service.ATMService;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +31,24 @@ public class ATMServiceImpl implements ATMService {
         BeanUtils.copyProperties(atMcardDTO,atMcard);
         atMcard.setBankAccount(bankAccount);
         atmRepository.save(atMcard);
+
+    }
+
+    @Override
+    public BankAccountDTO loginATM(String atmPIN) {
+
+        ATMcard atMcard = atmRepository.loginATM(atmPIN);
+        if(atMcard!=null){
+            BankAccountDTO bankAccountDTO = new BankAccountDTO();
+            ClientDTO clientDTO = new ClientDTO();
+            Client client = atMcard.getBankAccount().getClient();
+            BeanUtils.copyProperties(client,clientDTO);
+            BeanUtils.copyProperties(atMcard.getBankAccount(),bankAccountDTO);
+            bankAccountDTO.setClientDTO(clientDTO);
+            return bankAccountDTO;
+        }else{
+            throw new RuntimeException("Authentication Failed  ");
+        }
 
     }
 }

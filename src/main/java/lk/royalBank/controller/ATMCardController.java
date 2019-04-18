@@ -1,6 +1,7 @@
 package lk.royalBank.controller;
 
 import lk.royalBank.dto.ATMcardDTO;
+import lk.royalBank.dto.BankAccountDTO;
 import lk.royalBank.service.ATMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,5 +21,11 @@ public class ATMCardController {
         atmService.addATM(atMcardDTO);
     }
 
-
+    @GetMapping(value = "login/{pin}")
+    public BankAccountDTO atmLogin(@PathVariable("pin") String pin){
+        System.out.println(pin);
+//        System.out.println(pin);
+//        return "hello";
+        return atmService.loginATM(pin);
+    }
 }
