@@ -1,16 +1,17 @@
 package lk.royalBank.service.impl;
 
-import lk.royalBank.dto.BankAccountDTO;
-import lk.royalBank.dto.ClientDTO;
-import lk.royalBank.entity.BankAccount;
-import lk.royalBank.entity.Client;
-import lk.royalBank.entity.Employee;
+import lk.royalBank.dto.*;
+import lk.royalBank.entity.*;
 import lk.royalBank.repository.BankAccountRepository;
 import lk.royalBank.service.BankAccountService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @Transactional
@@ -40,15 +41,51 @@ public class BankAccountServiceImpl implements BankAccountService {
     public BankAccountDTO getAccountByID(String accountNumber) {
         if(bankAccountRepository.findById(accountNumber).isPresent()){
             BankAccount bankAccount = bankAccountRepository.findById(accountNumber).get();
-            BankAccountDTO bankAccountDTO = new BankAccountDTO();
+            List<WidthdrawDTO> widthdrawDTOS = new ArrayList<>();
+            List<DepositDTO> depositDTOS = new ArrayList<>();
+            List<SendMoneyDTO> sendMoneyDTOS = new ArrayList<>();
+
+            List<Withdraw> withdraws = bankAccount.getWithdraws();
+            Collections.reverse(withdraws);
+            withdraws.forEach(withdraw -> {
+
+                WidthdrawDTO widthdrawDTO = new WidthdrawDTO();
+                BeanUtils.copyProperties(withdraw,widthdrawDTO);
+                widthdrawDTOS.add(widthdrawDTO);
+            });
+
+            List<Deposit> deposits = bankAccount.getDeposits();
+            Collections.reverse(deposits);
+            deposits.forEach(deposit -> {
+                DepositDTO depositDTO = new DepositDTO();
+                BeanUtils.copyProperties(deposit,depositDTO);
+                depositDTOS.add(depositDTO);
+            });
+
+            List<SendMoney> sendMonies = bankAccount.getSendMonies();
+            Collections.reverse(sendMonies);
+            sendMonies.forEach(sendmoney -> {
+                SendMoneyDTO sendMoneyDTO = new SendMoneyDTO();
+                BeanUtils.copyProperties(sendmoney,sendMoneyDTO);
+                sendMoneyDTOS.add(sendMoneyDTO);
+            });
+
+            Client client = bankAccount.getClient();
+            Branch branch = client.getBranch();
             ClientDTO clientDTO = new ClientDTO();
+            BranchDTO branchDTO = new BranchDTO();
+            BankAccountDTO bankAccountDTO = new BankAccountDTO();
             BeanUtils.copyProperties(bankAccount,bankAccountDTO);
-            BeanUtils.copyProperties(bankAccount.getClient(),clientDTO);
+            BeanUtils.copyProperties(client,clientDTO);
+            BeanUtils.copyProperties(branch,branchDTO);
             bankAccountDTO.setClientDTO(clientDTO);
+
+            bankAccountDTO.setWidthdrawDTOS(widthdrawDTOS);
+            bankAccountDTO.setDepositDTOS(depositDTOS);
+            bankAccountDTO.setSendMoneyDTOS(sendMoneyDTOS);
             return bankAccountDTO;
-        }else{
-            throw new RuntimeException("Invalid Account Number ");
         }
+        throw new RuntimeException("Invalid Account Number ");
     }
 
     @Override

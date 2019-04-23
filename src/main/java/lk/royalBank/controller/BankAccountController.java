@@ -27,7 +27,7 @@ public class BankAccountController {
     @GetMapping(value = {"/{accNO}"})
     public BankAccountDTO accountByID(@PathVariable("accNO") String accno){
 
-        System.out.println(accno);
+        System.out.println(accno );
         return bankAccountService.getAccountByID(accno);
     }
 
