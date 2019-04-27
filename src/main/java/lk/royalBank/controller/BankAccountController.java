@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "api/v1/account")
+@RequestMapping(value = "api/v1/accounts")
 public class BankAccountController {
 
     @Autowired

@@ -20,7 +20,9 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/{empID}")
+
     public EmployeeDTO findbyID(@PathVariable("empID") String empID){
+
         return employeeService.findBYID(empID);
     }
 }

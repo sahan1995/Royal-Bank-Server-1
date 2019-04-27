@@ -18,7 +18,6 @@ public class CreateBankAccountController {
     @PostMapping
     public void createNewAccount(@RequestBody CreateAccountDTO createAccountDTO){
 
-
         createAccountService.createAccount(createAccountDTO);
     }
 

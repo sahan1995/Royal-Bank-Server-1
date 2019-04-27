@@ -6,6 +6,8 @@ import lk.royalBank.service.ATMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "api/v1/atmcards")
@@ -29,5 +31,15 @@ public class ATMCardController {
 //        System.out.println(pin);
 //        return "hello";
         return atmService.loginATM(pin);
+    }
+
+    @GetMapping(value = "/reqDeactive/{pin}/{nic}")
+    public String requestDeactiveATM (@PathVariable String pin,@PathVariable String nic) throws MessagingException {
+        return atmService.requestDeactiveATM(pin,nic);
+    }
+
+    @DeleteMapping(value = "/{pin}")
+    public void remove(@PathVariable String pin){
+        atmService.removeATM(pin);
     }
 }
